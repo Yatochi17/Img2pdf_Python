@@ -18,8 +18,8 @@ class ImgToPDFConv:
         title_label = tk.Label(self.root, text = "Image to PDF Converter", font = ("Times New Roman", 20, "bold"))
         title_label.pack(pady = 10)
 
-        Select_Img_btn = tk.Button(self.root, text="Please Select any images", command = self.select_img)
-        Select_Img_btn.pack(pady = (0, 10))
+        select_img_btn = tk.Button(self.root, text="Please Select any images", command = self.select_img)
+        select_img_btn.pack(pady = (0, 10))
 
         self.selected_images_listbox.pack(pady =(0, 10), fill = tk.BOTH, expand = True)
 
@@ -29,11 +29,14 @@ class ImgToPDFConv:
         pdf_name_entry = tk.Entry(self.root, textvariable=self.output_pdf_name, width= 40, justify= 'center')
         pdf_name_entry.pack()
 
-        Convert_btn = tk.Button(self.root, text="Convert to PDF", command=self.convert_img_to_pdf)
-        Convert_btn.pack(pady=(20, 40))
+        convert_btn = tk.Button(self.root, text="Convert to PDF", command=self.convert_img_to_pdf)
+        convert_btn.pack(pady=(20, 40))
 
     def select_img(self):
-        self.image_paths = filedialog.askopenfilename(title = "Select Images", filetypes = [("Image files","*.png; *.jpg; *.jpeg")])
+        self.image_paths = list(filedialog.askopenfilenames(
+            title="Select Images",
+            filetypes=[("Image files", "*.png; *.jpg; *.jpeg")]
+        ))
         self.update_selected_images_listbox()
 
     def update_selected_images_listbox(self):
